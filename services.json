@@ -1,0 +1,1870 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Blueprint of all the restfull web-servies of Test Application.",
+        "version": "1.0.1",
+        "title": "Webservices For Smart Mart Project",
+        "contact": {
+            "email": "hammadabbasi@axact.com"
+        },
+        "license": {
+            "name": "HA"
+        }
+    },
+    "host": "10.1.18.135",
+    "basePath": "/smartmart/api",
+    "tags": [
+        {
+            "name": "users",
+            "description": "User or Account Operations"
+        },
+		{
+            "name": "category",
+            "description": "Category Related Services"
+        },
+        {
+            "name": "cart",
+            "description": "Cart Related Services"
+        },
+        {
+            "name": "Product",
+            "description": "Products Related Services"
+        },
+        {
+            "name": "Orders",
+            "description": "Orders Related Services"
+        }
+
+    ],
+
+    "schemes": [
+        "http"
+    ],
+
+    "paths": {
+"/cms": {
+  "get": {
+    "tags": ["StaticPages"],
+    "summary": "This service is for getting StaticPages content from the system",
+    "description": "",
+    "operationId": "Pages Content ",
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "parameters": [
+      {
+        "name": "user_id",
+        "in": "query",
+        "description": "user id",
+        "required": true,
+        "type": "integer"
+      },
+      {
+        "name": "_token",
+        "in": "header",
+        "description": "Token that available in user object ",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "key",
+        "in": "query",
+        "enum": [
+          "terms",
+          "policies",
+		  "aboutus"
+        ],
+        "description": "key ",
+        "required": true,
+        "type": "string"
+      }
+
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful operation"
+      }
+    }
+  }
+},
+        "/userregister": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Post Sign Up Form",
+                "description": "Create a new user.",
+                "operationId": "signupUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "The email for signup",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Password for signup",
+                        "required": true,
+                        "type": "string",
+                        "format": "password"
+                    },
+                    {
+                        "name": "full_name",
+                        "in": "formData",
+                        "description": "Full Name of the user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "formData",
+                        "description": "Phone Number of the user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "enum": [
+                            "ios",
+                            "android"                            
+                        ],
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_token",
+                        "in": "formData",
+                        "description": "Device Token of the user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profile_picture",
+                        "in": "formData",
+                        "description": "Profile image of the user",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "User Login",
+                "description": "User Login",
+                "operationId": "login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email Address",
+                        "required": true,
+                        "type": "string",
+                        "default": "hammad@hammad.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Password",
+                        "required": true,
+                        "type": "string",
+                        "default": "123456"
+                    },
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "enum": [
+                            "ios",
+                            "android"                            
+                        ],
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_token",
+                        "in": "formData",
+                        "description": "Device Token of the user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        }, 
+        "/logout": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "User Logout",
+                "description": "User Logout",
+                "operationId": "logout",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "text"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/forgotpassword": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Forgot Password",
+                "description": "Forgot Password",
+                "operationId": "forgotpassword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email Address",
+                        "required": true,
+                        "type": "string",
+                        "default": "hammad@hotmail.com"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        }, 
+        "/user/{user_id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Detail",
+                "description": "Get User Detail",
+                "operationId": "getProfile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "User Id",
+                        "required": true,
+                        "type": "text"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/user/update": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update Device Token",
+        "description": "",
+        "operationId": "Update Device Token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "user id for different fields calculation",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "old_password",
+            "in": "formData",
+            "description": "old_password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "full_name",
+            "in": "formData",
+            "description": "full_name",
+            "required": false,
+            "type": "string"
+          },
+		  
+		  {
+            "name": "phone_number",
+            "in": "formData",
+            "description": "phone_number",
+            "required": false,
+            "type": "string"
+          },
+			{
+			"name": "profile_picture",
+			"in": "formData",
+			"description": "Profile image of the user",
+			"required": false,
+			"type": "file"
+			},
+		  
+          {
+            "name": "_token",
+            "in": "header",
+            "description": "Token that available in user object ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+		"/user/updatepassword": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update Device Token",
+        "description": "",
+        "operationId": "Update Device Token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "user id for different fields calculation",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "_token",
+            "in": "header",
+            "description": "Token that available in user object ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+		"/Category": {
+            "get": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "Show All Categories",
+                "description": "",
+                "operationId": "getCategories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+
+                "parameters": [
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "text"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+
+        "/Category/{categoryId}": {
+            "get": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "Get Category By Id",
+                "description": "Get Category By Id",
+                "operationId": "getCategory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category Id",
+                        "required": true,
+                        "type": "integer",
+                        "default": "1"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+
+        "/SubCategories/Category/{categoryId}": {
+            "get": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "Get Sub Categories By  Category Id",
+                "description": "Get Sub Categories By  Category Id",
+                "operationId": "getSubCategories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category Id",
+                        "required": true,
+                        "type": "integer",
+                        "default": "1"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		
+		"/addToCart": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Add Product to cart",
+                "description": "Add To Cart",
+                "operationId": "addToCart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "formData",
+                        "description": "Id of the product you want to add in cart",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "formData",
+						"description": "How much of that you wnt to add in cart",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user who is adding item to cart",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/addToCartArray": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Add Products to cart",
+                "description": "Add To Cart",
+                "operationId": "addToCartArray",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "product_ids",
+                        "in": "formData",
+                        "description": "Id of the product you want to add in cart",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "quantities",
+                        "in": "formData",
+						"description": "How much of that you wnt to add in cart",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user who is adding item to cart",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/getUserCart": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Get User Cart",
+                "description": "Get User Cart",
+                "operationId": "getUserCart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "Id of the user whose cart items are to be displayed",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/clearMyCart": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Clear User Cart",
+                "description": "Clear User Cart",
+                "operationId": "clearMyCart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "description": "Id of the user whose cart items are to be deleted",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/addOrder": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Add Order",
+                "description": "Add Order",
+                "operationId": "addOrder",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "items_ids",
+                        "in": "formData",
+                        "description": "Ids of the product you want to add in cart",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "quantities",
+                        "in": "formData",
+						"description": "How much of that you wnt to add in cart",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "address_id",
+                        "in": "formData",
+						"description": "Address Id of the address on which user is going to get this order delivered",
+                        "required": true,
+                        "type": "integer"
+                    },
+					{
+                        "name": "delivery_datetime",
+                        "in": "formData",
+						"description": "Date and Time of delivery; specimen format 2017-04-19 13:50:55",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "additional_notes",
+                        "in": "formData",
+						"description": "Additional Notes",
+                        "required": false,
+                        "type": "string"
+                    },
+					
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user who is adding item to cart",
+                        "required": true,
+                        "type": "string"
+                    },
+					 {
+                        "name": "payment_method",
+                        "in": "formData",
+						"description": "payment_method; cc or cod",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		
+		"/completeorders": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Get User Completed Orders",
+                "description": "Get User Completed Orders",
+                "operationId": "getUserCompletedOrders",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id of the user whose orders are to be displayed",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/pendingorders": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Get User Pending Orders",
+                "description": "Get User Pending Orders",
+                "operationId": "getUserCompletedOrders",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id of the user whose orders are to be displayed",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+
+		"/Products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Show All Products",
+                "description": "",
+                "operationId": "getAllProducts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+
+        "/Products/{productId}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Product By Id",
+                "description": "Get Product By Id",
+                "operationId": "getProduct",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "Product Id",
+                        "required": true,
+                        "type": "integer",
+                        "default": "1"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+
+        "/Products/Category/{categoryId}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Products By Category Id",
+                "description": "Get Product By Category Id",
+                "operationId": "getProductByCategory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category Id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/Brands/{categoryId}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Brands By Category Id",
+                "description": "Get Brands By Category Id",
+                "operationId": "getBrands",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category Id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/Products/Brand": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Products By Brand Id",
+                "description": "Get Product By Brand Id",
+                "operationId": "getProductByBrand",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "brandId",
+                        "description": "Brand Id",
+                        "required": true,
+						"in": "formData",
+                        "type": "integer"
+                    },
+					{
+                        "name": "user_id",
+                        "description": "User Id",
+						"in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/Products/Search": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Search Products",
+                "description": "Search Products",
+                "operationId": "searchProducts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "description": "keyword",
+                        "required": true,
+						"in": "formData",
+                        "type": "string"
+                    },
+					{
+                        "name": "user_id",
+                        "description": "User Id",
+						"in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/Products/Liked": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Liked Products",
+                "description": "Get Liked Products",
+                "operationId": "getFavoriteProduct",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "description": "User Id",
+						"in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/Product/favorite": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "User Login",
+                "description": "User Login",
+                "operationId": "login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+                        "description": "Id of Logged In User",
+                        "required": true,
+                        "type": "integer",
+                        "default": "97"
+                    },
+                    {
+                        "name": "product_id",
+                        "in": "formData",
+                        "description": "id of the product being favouritted",
+                        "required": true,
+                        "type": "integer",
+                        "default": "1"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/address/add": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Add User Address",
+                "description": "Add User Address",
+                "operationId": "address/add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "country_id",
+                        "in": "formData",
+                        "description": "Id of the country you want to add in address",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "description": "country name of the country you want to add in address",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "city_id",
+                        "in": "formData",
+                        "description": "city_id of the city you want to add in address",
+                        "required": true,
+                        "type": "integer"
+                    },
+					{
+                        "name": "city",
+                        "in": "formData",
+                        "description": "city name of the city you want to add in address",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "street_name",
+                        "in": "formData",
+                        "description": "street_name of the address you want to add in address",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "building_name",
+                        "in": "formData",
+                        "description": "building_name of the address you want to add in address",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "floor",
+                        "in": "formData",
+                        "description": "floor of the address you want to add in address",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "block",
+                        "in": "formData",
+                        "description": "block of the address you want to add in address",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "appartment",
+                        "in": "formData",
+                        "description": "appartment of the address you want to add in address",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "nearest_landmark",
+                        "in": "formData",
+                        "description": "nearest_landmark of the address you want to add in address",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "location_type",
+                        "in": "formData",
+                        "description": "location_type of the address you want to add in address; it sould be building or villa",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user who is adding address",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/address/edit": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Add User Address",
+                "description": "Add User Address",
+                "operationId": "address/edit",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "Id of the address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "country_id",
+                        "in": "formData",
+                        "description": "Id of the country you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "description": "country name of the country you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "city_id",
+                        "in": "formData",
+                        "description": "city_id of the city you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "city",
+                        "in": "formData",
+                        "description": "city name of the city you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "street_name",
+                        "in": "formData",
+                        "description": "street_name of the address you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "building_name",
+                        "in": "formData",
+                        "description": "building_name of the address you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "floor",
+                        "in": "formData",
+                        "description": "floor of the address you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "block",
+                        "in": "formData",
+                        "description": "block of the address you want to add in address",
+                        "required": false,
+                        "type": "string"
+                    },
+					{
+                        "name": "appartment",
+                        "in": "formData",
+                        "description": "appartment of the address you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "nearest_landmark",
+                        "in": "formData",
+                        "description": "nearest_landmark of the address you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+					{
+                        "name": "location_type",
+                        "in": "formData",
+                        "description": "location_type of the address you want to add in address",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user who is adding item to cart",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/address/delete": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Add User Address",
+                "description": "Add User Address",
+                "operationId": "address/delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "Id of the address",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/address/select": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Selected Addresses",
+                "description": "Get User Selected Addresses",
+                "operationId": "address/selected",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                     {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user ",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "address_id",
+                        "in": "formData",
+						"description": "Id of the address to select ",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/address/selected": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Selected Addresses",
+                "description": "Get User Selected Addresses",
+                "operationId": "address/selected",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                     {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/address": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Addresses",
+                "description": "Add User Addresses",
+                "operationId": "address",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                     {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/notifications/get": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Noties",
+                "description": "Get User Noties",
+                "operationId": "notifications/get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/notifications/clear": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Noties",
+                "description": "clear User Noties",
+                "operationId": "notifications/clear",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/notifications/unclear": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get User Noties",
+                "description": "unclear User Noties",
+                "operationId": "notifications/unclear",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/ContactDetails": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Contact Details",
+                "description": "Contact Details",
+                "operationId": "ContactDetails",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/feedback/post": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Feedback",
+                "description": "Feedback",
+                "operationId": "feedback/post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "Id of the user",
+                        "required": true,
+                        "type": "integer"
+                    },
+					{
+                        "name": "feedback_message",
+                        "in": "formData",
+						"description": "feedback_message from the user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+		"/updateToken": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update Device Token",
+                "description": "Update Device Token",
+                "operationId": "updateToken",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "description": "type of devei io or android",
+                        "required": true,
+                        "type": "text"
+                    },
+                    {
+                        "name": "device_token",
+                        "in": "formData",
+						"description": "Device Token",
+                        "required": true,
+                        "type": "string"
+                    },
+					{
+                        "name": "user_id",
+                        "in": "formData",
+						"description": "id of logged in user",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "_token",
+                        "in": "header",
+                        "description": "Token",
+                        "required": true,
+                        "type": "string"
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        }
+		
+		
+    },
+
+    "securityDefinitions": {
+    },
+    "definitions": {
+    }
+}

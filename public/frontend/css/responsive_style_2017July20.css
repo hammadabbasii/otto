@@ -1,0 +1,59 @@
+@media (min-width: 100px) and (max-width: 1025px) {header{overflow:hidden;}}
+
+@media (min-width: 100px) and (max-width: 940px) {
+.home header {position:relative !important;}	
+main{padding:0 15px}
+.logo{text-align:center;height:auto;width:100% !important;}
+.searchtoggle{display:none}
+.push-logo{margin:10px 0}
+.logo img{max-height:60px;width:auto}
+header .searchform{display:none}
+.slider .inner-item{height:200px}
+.slider .inner-item .caption{display:none}
+.logo img{height:auto;width:auto}
+.searchbar{width:90% !important;margin:2% 5%}
+.headercart{width:100%!important}
+.slidercenter{display:none}
+.slidercenter{height:65px;position:relative;text-align:center;width:100%}
+#tabs-menu{height:auto}
+.cat_large_box h4{padding-left:0}
+.leftsidebar{margin-bottom:2%;min-height:auto!important}
+.menu-header{background:#009fe3;width:100%;left:0}
+.contactpage .col-md-4,.contactpage .col-md-6{width:100%;padding:0}
+.headercart{width:auto!important;left:0;margin-left:0}
+#tabs-menu li{margin-bottom:3%}
+.homeproducts .col-md-3{width:100%}
+.headerlinks{left:0;margin:0 auto;width:150px!important}
+.menu-header>ul>li>a:hover{color:#000}
+.headercart{background:rgba(0,0,0,0) url("../images/headercart.png") no-repeat scroll 40% center}
+.item-slider img{height:auto}
+header{position:relative;padding-bottom:0}
+.slick-track{padding:0}
+.menu-header ul li{text-align:center}
+.copyright{display:block;text-align:center}
+body .padright{padding-right:15px}
+.subfooter{text-align:center}
+.text-right{text-align:center!important;padding-top:15px}
+.menu-header>ul>li>a{color:#FFF;padding:10px 0}
+body .padleft{padding-left:15px}
+.inner-banner span{line-height:30px}
+.breadcrumbs{padding-left:20px}
+.categories .slick-next.slick-arrow{left:0}
+.categories .slick-prev.slick-arrow{right:0}
+.contactpage .pull-right{float:none!important}
+.contentpages .row{margin:0}
+}
+
+
+@media (min-width: 768px) and (max-width: 770px) {.menu-header ul	{display:block !important;text-align:center;}	}
+
+
+@media (min-width: 100px) and (max-width: 415px) 
+{
+	
+.sub-categories-manu{margin:5%;width:90%!important}
+.orderpage table td img{height:30px;padding:0;width:auto}
+.mtop25px-lg{width:100%!important}
+.sub-categories-manu .nav .up,.sub-categories-manu .nav .down{display:none}
+
+}

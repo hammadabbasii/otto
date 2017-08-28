@@ -1,0 +1,5 @@
+AddType application/x-httpd-php55 .php
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule ^api/(.*)$ index.php?/$1 [L]
+</IfModule>
